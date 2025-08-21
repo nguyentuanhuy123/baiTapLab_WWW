@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+  <form action="${pageContext.request.contextPath}/register-servlet" method="post" style="background: black; padding: 50px;color: white">
+    <h1>REGISTER</h1>
+    <header>Name <span style="color: red">*</span></header>
+    <div style="display: inline-block; margin-right: 20px;">
+      <label>
+        <input type="text" name="firstName" style="width: 350px;"> <br>
+        First
+      </label>
+    </div>
+    <div style="display: inline-block;">
+      <label>
+        <input type="text" name="lastName" style="width: 350px;"> <br>
+        Last
+      </label>
+    </div>
+    <br><br>
+    <header>Username <span style="color: red">*</span></header>
+    <div>
+      <label>
+        <input type="text" name="userName" style="width: 733px;"> <br>
+      </label>
+    </div>
+    <br>
+    <header>Email <span style="color: red">*</span></header>
+    <div>
+      <label>
+        <input type="text" name="email" style="width: 733px;"> <br>
+      </label>
+    </div>
+    <br>
+    <header>Password <span style="color: red">*</span></header>
+    <div>
+      <label>
+        <input type="text" name="pass" style="width: 733px;"> <br>
+      </label>
+    </div>
+    <br>
+    <header>Facebook <span style="color: red">*</span></header>
+    <div style="display: inline-block;">
+      <label>
+        <input type="text" name="facebook" style="width: 733px;"> <br>
+      </label>
+      Enter your Facebook profile URL
+    </div>
+    <br><br>
+      <label>
+        <span>Short bio <span style="color: red">*</span></span><br>
+        <textarea name="shortBio" rows="5" cols="100" style="width: 933px;"></textarea>
+      </label>
+    <br> <br>
+    <input type="submit" value="Submit" style="width: 150px;height: 50px">
+
+
+
+  </form>
+</body>
+</html>
