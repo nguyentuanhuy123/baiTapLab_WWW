@@ -8,12 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ include file="header.jsp" %>
 <html>
 <head>
     <title>Quản lý điện thoại</title>
     <style>
-        body{
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
             margin: 20px;
         }
@@ -78,58 +83,61 @@
     <c:if test="${not empty error}">
         <div class="msg error">${error}</div>
     </c:if>
-
-    <table>
-        <thead>
-        <tr>
-            <th>MADT</th>
-            <th>TENDT</th>
-            <th>NĂM SX</th>
-            <th>CAUHINH</th>
-            <th>NHÀ CUNG CẤP</th>
-            <th>HÌNH ẢNH</th>
-            <th>HÀNH ĐỘNG</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="dt" items="${dienThoais}">
+    <div style="flex: 1;display:flex; justify-content:center; align-items:flex-start;">
+        <table >
+            <thead>
             <tr>
-                <td>${dt.maDt}</td>
-                <td>${dt.tenDt}</td>
-                <td>${dt.namSanXuat}</td>
-                <td title="${dt.cauHinh}">${fn:escapeXml(dt.cauHinh)}</td>
-                <td>
-                    <c:choose>
-                        <c:when test="${not empty dt.ncc}">${dt.ncc.tenNhaNcc}</c:when>
-                        <c:otherwise>-</c:otherwise>
-                    </c:choose>
-                </td>
-                <td>
-                    <c:choose>
-                        <c:when test="${not empty dt.hinhAnh}">
-                            <img src="${pageContext.request.contextPath}/images/${dt.hinhAnh}" alt="${dt.tenDt}" style="max-height:40px;">
-                        </c:when>
-                        <c:otherwise>-</c:otherwise>
-                    </c:choose>
-                </td>
-                <td>
-                    <a class="btn view" href="${pageContext.request.contextPath}/dt-form?maDt=${dt.maDt}">Sửa</a>
+                <th>MADT</th>
+                <th>TENDT</th>
+                <th>NĂM SX</th>
+                <th>CAUHINH</th>
+                <th>NHÀ CUNG CẤP</th>
+                <th>HÌNH ẢNH</th>
+                <th>HÀNH ĐỘNG</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="dt" items="${dienThoais}">
+                <tr>
+                    <td>${dt.maDt}</td>
+                    <td>${dt.tenDt}</td>
+                    <td>${dt.namSanXuat}</td>
+                    <td title="${dt.cauHinh}">${fn:escapeXml(dt.cauHinh)}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${not empty dt.ncc}">${dt.ncc.tenNhaNcc}</c:when>
+                            <c:otherwise>-</c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${not empty dt.hinhAnh}">
+                                <img src="${pageContext.request.contextPath}/images/${dt.hinhAnh}" alt="${dt.tenDt}" style="max-height:40px;">
+                            </c:when>
+                            <c:otherwise>-</c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <a class="btn view" href="${pageContext.request.contextPath}/dt-form?maDt=${dt.maDt}">Sửa</a>
 
-                    <form action="${pageContext.request.contextPath}/quanly" method="post" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
-                        <input type="hidden" name="action" value="delete"/>
-                        <input type="hidden" name="maDt" value="${dt.maDt}"/>
-                        <button type="submit" class="btn delete">Xóa</button>
-                    </form>
-                </td>
-            </tr>
-        </c:forEach>
-        <c:if test="${empty dienThoais}">
-            <tr>
-                <td colspan="7">Không có bản ghi nào.</td>
-            </tr>
-        </c:if>
-        </tbody>
-    </table>
+                        <form action="${pageContext.request.contextPath}/quanly" method="post" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                            <input type="hidden" name="action" value="delete"/>
+                            <input type="hidden" name="maDt" value="${dt.maDt}"/>
+                            <button type="submit" class="btn delete">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+            <c:if test="${empty dienThoais}">
+                <tr>
+                    <td colspan="7">Không có bản ghi nào.</td>
+                </tr>
+            </c:if>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 </body>
 </html>
+<%@ include file="footer.jsp" %>

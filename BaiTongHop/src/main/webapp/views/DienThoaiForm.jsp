@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="header.jsp" %>
 <html>
 <head>
     <title>Thêm Điện Thoại</title>
@@ -8,6 +9,14 @@
         label { display:block; margin-top:8px; }
         .error { color: red; }
         .form-control { width: 400px; padding:6px; }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -23,7 +32,7 @@
     </div>
 </c:if>
 
-<form method="post" action="${pageContext.request.contextPath}/dt-form" enctype="multipart/form-data">
+<form method="post" action="${pageContext.request.contextPath}/dt-form" enctype="multipart/form-data" style="flex: 1;display:flex; justify-content:center;flex-direction: column;">
     <label for="maDt">Mã ĐT *</label>
     <input class="form-control" type="text" id="maDt" name="maDt" value="${maDt != null ? maDt : ''}" />
 
@@ -55,3 +64,4 @@
 
 </body>
 </html>
+<%@ include file="footer.jsp" %>

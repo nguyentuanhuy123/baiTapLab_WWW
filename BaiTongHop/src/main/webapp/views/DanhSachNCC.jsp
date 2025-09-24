@@ -7,15 +7,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="header.jsp" %>
 <html>
 <head>
     <title>Title</title>
     <style>
-        body{
+        body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-content: center;
+            align-items: center;
             min-height: 100vh;
+            margin: 0;
         }
         table{
             text-align: center;
@@ -41,8 +44,9 @@
     <input type="text" name="kw" placeholder="Nhap ma, ten, dia chi hoac sdt cua nha cung cap...">
     <button type="submit"> Tim Kiem</button>
 </form>
-<table>
-    <thead>
+<div style="flex: 1">
+    <table>
+        <thead>
         <tr>
             <th>MANCC</th>
             <th>TENNHACC</th>
@@ -50,8 +54,8 @@
             <th>SODIENTHOAI</th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         <c:forEach var="tt" items="${nhaCungCaps}">
             <tr>
                 <td>${tt.maNcc}</td>
@@ -62,9 +66,12 @@
             </tr>
         </c:forEach>
 
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
+</div>
+
 
 </body>
 </html>
+<%@ include file="footer.jsp" %>
