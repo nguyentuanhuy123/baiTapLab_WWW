@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <bean id="address1" class="iuh.fit.se.bai02.xmlbased.models.Address">
+        <property name="city" value="Los Angeles"/>
+        <property name="state" value="California"/>
+        <property name="country" value="USA"/>
+    </bean>
+    <bean id="address2" class="iuh.fit.se.bai02.xmlbased.models.Address">
+        <property name="city" value="San Francisco"/>
+        <property name="state" value="California"/>
+        <property name="country" value="USA"/>
+    </bean>
+    <bean id="employee1" class="iuh.fit.se.bai02.xmlbased.models.Employee">
+        <property name="id" value="1"/>
+        <property name="name" value="Nguyen Van A"/>
+        <property name="address" ref="address1"/>
+    </bean>
+    <bean id="employee2" class="iuh.fit.se.bai02.xmlbased.models.Employee">
+        <constructor-arg name="id" value="2"/>
+        <constructor-arg name="name" value="Le Thi B"/>
+        <constructor-arg name="address" ref="address2"/>
+    </bean>
+</beans>
