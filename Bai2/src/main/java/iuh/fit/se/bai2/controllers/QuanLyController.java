@@ -37,7 +37,7 @@ public class QuanLyController {
         }
 
         List<String> nccIds = nccs.stream()
-                .map(NhaCungCap::getMaNcc) // đảm bảo getter là getMaNcc()
+                .map(NhaCungCap::getMaNcc)
                 .toList();
 
         List<DienThoai> dts;

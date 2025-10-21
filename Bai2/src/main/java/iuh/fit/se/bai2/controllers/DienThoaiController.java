@@ -39,9 +39,8 @@ public class DienThoaiController {
     public String showForm(Model model) {
         List<NhaCungCap> nccs = nhaCungCapService.findAll();
         model.addAttribute("nccs", nccs);
-        // cung cấp một object DienThoai rỗng nếu bạn dùng form:form binding
         model.addAttribute("dienThoai", new DienThoai());
-        return "DienThoaiForm"; // DienThoaiForm.jsp trong /WEB-INF/views/
+        return "DienThoaiForm";
     }
 
     @PostMapping("/dt-form")
@@ -54,12 +53,9 @@ public class DienThoaiController {
             @RequestParam(name = "hinhAnh", required = false) MultipartFile hinhAnh,
             RedirectAttributes redirectAttributes
     ) {
-
-        // Lấy NhaCungCap (service nên trả Optional or entity)
         Optional<NhaCungCap> maybeNcc = nhaCungCapService.findById(maNcc);
         NhaCungCap ncc = maybeNcc.orElse(null);
 
-        // Tạo object DienThoai (constructor hoặc setter tuỳ bạn)
         DienThoai dienThoai = new DienThoai();
         dienThoai.setMaDt(maDt);
         dienThoai.setTenDt(tenDt);
@@ -67,16 +63,13 @@ public class DienThoaiController {
         dienThoai.setCauHinh(cauHinh);
         dienThoai.setNcc(ncc);
 
-        // Xử lý upload file nếu có
         if (hinhAnh != null && !hinhAnh.isEmpty()) {
-            // sạch tên file
             String originalFilename = StringUtils.cleanPath(hinhAnh.getOriginalFilename());
             try {
                 Path uploadPath = Paths.get(uploadDir);
                 if (Files.notExists(uploadPath)) {
                     Files.createDirectories(uploadPath);
                 }
-                // Nếu muốn tránh trùng tên, bạn có thể thêm timestamp hoặc UUID
                 Path target = uploadPath.resolve(originalFilename);
                 try (var in = hinhAnh.getInputStream()) {
                     Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
@@ -85,12 +78,11 @@ public class DienThoaiController {
             } catch (IOException ex) {
                 ex.printStackTrace();
                 redirectAttributes.addFlashAttribute("message", "Không upload được file: " + ex.getMessage());
-                // bạn có thể redirect về form hiển thị lỗi
+
                 return "redirect:/dt-form";
             }
         }
 
-        // Lưu vào DB qua service
         try {
             dienThoaiService.add(dienThoai);
             redirectAttributes.addFlashAttribute("message", "Thêm điện thoại thành công");

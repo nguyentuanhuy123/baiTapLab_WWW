@@ -1,9 +1,11 @@
-package iuh.fit.se.lab05_02.models;
+package iuh.fit.se.bai2.models;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -27,4 +29,52 @@ public class DienThoai {
 
     @Column(name = "HINHANH")
     private String hinhAnh;
+
+    public String getMaDt() {
+        return maDt;
+    }
+
+    public void setMaDt(String maDt) {
+        this.maDt = maDt;
+    }
+
+    public String getTenDt() {
+        return tenDt;
+    }
+
+    public void setTenDt(String tenDt) {
+        this.tenDt = tenDt;
+    }
+
+    public String getNamSanXuat() {
+        return namSanXuat;
+    }
+
+    public void setNamSanXuat(String namSanXuat) {
+        this.namSanXuat = namSanXuat;
+    }
+
+    public String getCauHinh() {
+        return cauHinh;
+    }
+
+    public void setCauHinh(String cauHinh) {
+        this.cauHinh = cauHinh;
+    }
+
+    public NhaCungCap getNcc() {
+        return ncc;
+    }
+
+    public void setNcc(NhaCungCap ncc) {
+        this.ncc = ncc;
+    }
+
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+    }
 }

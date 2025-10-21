@@ -30,7 +30,6 @@ public class DanhSachController {
             @RequestParam(value = "kw", required = false) String kw,
             Model model
     ) {
-        // Lấy danh sách NhaCungCap (tìm hoặc tất cả)
         List<NhaCungCap> nccs;
         if (kw != null && !kw.trim().isEmpty()) {
             nccs = nhaCungCapService.search(kw.trim());
@@ -38,12 +37,9 @@ public class DanhSachController {
             nccs = nhaCungCapService.findAll();
         }
 
-        // Lấy danh sách mã nhà cung cấp
         List<String> nccIds = nccs.stream()
-                .map(NhaCungCap::getMaNcc)   // đảm bảo tên getter đúng: getMaNcc()
+                .map(NhaCungCap::getMaNcc)
                 .toList();
-
-        // Lấy danh sách DienThoai theo danh mục (nccIds)
         List<DienThoai> dts;
         if (nccIds.isEmpty()) {
             dts = List.of();
@@ -51,12 +47,10 @@ public class DanhSachController {
             dts = dienThoaiService.getByDanhMuc(nccIds);
         }
 
-        // Đưa vào model và trả view (JSP)
         model.addAttribute("nccs", nccs);
         model.addAttribute("dts", dts);
         model.addAttribute("kw", kw);
 
-        // Nếu bạn dùng JSP trong /WEB-INF/views/ -> cấu hình .jsp tên "DanhSachDienThoaiNCC"
         return "DanhSachDienThoaiNCC";
     }
 }

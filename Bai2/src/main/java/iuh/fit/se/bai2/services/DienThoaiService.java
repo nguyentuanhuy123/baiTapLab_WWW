@@ -1,12 +1,13 @@
-package iuh.fit.se.bai1.services;
+package iuh.fit.se.bai2.services;
 
-import iuh.fit.se.bai1.entities.Employee;
+
+
+import iuh.fit.se.bai2.models.DienThoai;
 
 import java.util.List;
 
-public interface EmployeeService {
-    public Employee save(Employee employee);
-    public List<Employee> findAll();
-    public Employee findById(int id);
-    public void deleteById(int id);
+public interface DienThoaiService {
+    public List<DienThoai> getByDanhMuc(List<String> ids);
+    public boolean add(DienThoai dienThoai);
+    public void delete(String id);
 }

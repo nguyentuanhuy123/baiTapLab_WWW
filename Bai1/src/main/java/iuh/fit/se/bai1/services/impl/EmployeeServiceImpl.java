@@ -28,4 +28,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee findById(int id) {
         return repository.findById(id).orElse(null);
     }
+
+    @Override
+    public void deleteById(int id) {
+         repository.deleteById(id);
+    }
 }

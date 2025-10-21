@@ -1,36 +1,51 @@
 package iuh.fit.se.bai2.services.impl;
 
-import iuh.fit.se.bai1.entities.Employee;
-import iuh.fit.se.bai1.repositories.EmployeeRepository;
-import iuh.fit.se.bai1.services.EmployeeService;
+import iuh.fit.se.bai2.models.DienThoai;
+import iuh.fit.se.bai2.repositories.DienThoaiRepository;
+import iuh.fit.se.bai2.services.DienThoaiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
-    EmployeeRepository repository;
+public class DienThoaiServiceImpl implements DienThoaiService {
+
+    private final DienThoaiRepository repository;
+
     @Autowired
-    public EmployeeServiceImpl(EmployeeRepository repository){
-        this.repository=repository;
-    }
-    @Override
-    public Employee save(Employee employee) {
-        return repository.save(employee);
+    public DienThoaiServiceImpl(DienThoaiRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public List<Employee> findAll() {
-        return repository.findAll();
+    public List<DienThoai> getByDanhMuc(List<String> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return List.of();
+        }
+        return repository.findByNccMaNccIn(ids);
     }
 
     @Override
-    public Employee findById(int id) {
-        return repository.findById(id).orElse(null);
+    @Transactional
+    public boolean add(DienThoai dienThoai) {
+        if (dienThoai == null || dienThoai.getMaDt() == null) {
+            return false;
+        }
+        Optional<DienThoai> existed = repository.findById(dienThoai.getMaDt());
+        if (existed.isPresent()) {
+            return false;
+        }
+        repository.save(dienThoai);
+        return true;
     }
 
     @Override
-    public void deleteById(int id) {
-         repository.deleteById(id);
+    @Transactional
+    public void delete(String id) {
+        if (id == null) return;
+        repository.deleteById(id);
     }
 }
